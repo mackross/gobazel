@@ -83,18 +83,18 @@ func (gpf *GoPathFs) getRealDirAttr(name string) (*fuse.Attr, fuse.Status) {
 		Ino:    t.Ino,
 		Size:   uint64(t.Size),
 		Blocks: uint64(t.Blocks),
-		Mode:   t.Mode,
+		Mode:   uint32(t.Mode),
 	}
 
-	sec, nsec := t.Atim.Unix()
+	sec, nsec := t.Atimespec.Unix()
 	attr.Atime = uint64(sec)
 	attr.Atimensec = uint32(nsec)
 
-	sec, nsec = t.Ctim.Unix()
+	sec, nsec = t.Ctimespec.Unix()
 	attr.Ctime = uint64(sec)
 	attr.Ctimensec = uint32(nsec)
 
-	sec, nsec = t.Mtim.Unix()
+	sec, nsec = t.Mtimespec.Unix()
 	attr.Mtime = uint64(sec)
 	attr.Mtimensec = uint32(nsec)
 
